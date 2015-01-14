@@ -1,2 +1,2 @@
 # webb.sh
-## Simple bash script that install useful stuff for you.
+Simple bash script that install useful stuff for you.
