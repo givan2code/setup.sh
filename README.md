@@ -19,12 +19,12 @@ It can be used on :
 
 It's can be installed via curl : 
 
-    bash <(curl -s https://raw.githubusercontent.com/drKraken/webb.sh/master/webb.sh)
+    bash <(curl -s https://raw.githubusercontent.com/drKraken/frontend-dev-setup/master/frontend-dev-setup.sh)
 
 If you dont have curl installed : 
 
     sudo apt-get install curl;
-    bash <(curl -s https://raw.githubusercontent.com/drKraken/webb.sh/master/webb.sh)
+    bash <(curl -s https://raw.githubusercontent.com/drKraken/frontend-dev-setup/master/frontend-dev-setup.sh)
 
 # Usage 
 
