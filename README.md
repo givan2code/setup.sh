@@ -3,7 +3,7 @@
 Inpired by Laptop script from <https://github.com/thoughtbot> 
 
 Frontend-dev-setup is a simple way to make your unix/linux machine ready for frontend development.
-With this script you can in one click install all tools, that you need for comfortable frondev on Linux machine.
+With this script you can in one click install all tools, that you need for comfortable frontdev on Linux machine.
 
 # Support
 
@@ -28,7 +28,7 @@ If you dont have curl installed :
 
 # Usage 
 
-If you have a trouble on your machine you can view ~/.fds-log.log or send me mail with your error type and type of distro
+If you have a trouble on your machine you can view ~/.fds-log.log or send me mail with your error type and type of distro.
 
 # Help
 
