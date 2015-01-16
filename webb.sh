@@ -95,6 +95,8 @@ function p_install {
 # basic setup
 function basic_setup {
 	local npm="npm"
+	local imp="convert"
+
 	echo -e "\033[1;30m- running basic setup..."
 	pre_upgd
 	# installing node and npm tools
@@ -115,6 +117,13 @@ function basic_setup {
 	#installing browsers
 	p_install google-chrome-stable
 	p_install firefox
+	#installing imagemagick and other
+	if [ -e "$dev_path$imp" ]; then
+		echo -e "\033[1;37m (imagemagick) :: already installed \033[0m"
+	else
+		echo -e "\033[1;32m (imagemagick) :: not installed.\033[0m"
+		sudo apt-get install imagemagick
+	fi
 }
 
 echo -e "\033[1;30m(v$script_version)\033[0;35m hello, $USER! thx for using  $script_name ..."
