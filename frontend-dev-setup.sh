@@ -8,7 +8,6 @@
 script_name=$1
 script_version="0.1"
 dev_path="/usr/bin/"
-node_path="/usr/bin/nodejs"
 
 #npm package list . simply add one more you like
 function npm-package-list {
@@ -17,9 +16,20 @@ function npm-package-list {
 	npm_install bower
 	npm_install mocha
 	npm_install testem
-	npm-install karma-cli
 	npm_install sails
 }
+
+# check for npm in path
+function npm_av {
+	if [ -e "$dev_path$npm" ]; then
+		npm-package-list
+	else
+		sudo apt-get --purge remove nodejs*
+		node_install
+		npm-package-list
+	fi
+}
+
 #download package
 function download {
 	local dname=$1
@@ -40,15 +50,15 @@ function check_packgn {
 		echo -e "\033[0;31menter package name p_install() func \033[0m"
 	fi
 }
+
 #make pre updates
 function pre_upgd {
 	echo -e "- normalize package list..."
-	# sudo apt-get autoremove;
-	# sudo apt-get autoclean; 
-	# sudo apt-get upgrade; 
-	# sudo apt-get updateecho -e "\033[1;37m ($name) :: already installed \033[0m"
+	sudo apt-get autoremove;
+	sudo apt-get autoclean; 
 	echo -e "\033[1;32m- ready to installing..."
 }
+
 #installing sublime-text
 function sublime-install {
 	local sublime="sublime-text"
@@ -62,6 +72,17 @@ function sublime-install {
 		sudo apt-get install sublime-text
 	fi
 }
+
+#installing image magick 
+function im_setup {
+	if [ -e "$dev_path$imp" ]; then
+		echo -e "\033[1;37m (imagemagick) :: already installed \033[0m"
+	else
+		echo -e "\033[1;32m (imagemagick) :: not installed.\033[0m"
+		sudo apt-get install imagemagick
+	fi
+}
+
 #installing npm packages
 function npm_install {
 	local pckgname=$1
@@ -72,6 +93,7 @@ function npm_install {
 		sudo npm install -g $pckgname
 	fi
 }
+
 #installing node (tested in mint 13 x64)
 function node_install {
 	if [ -e "/usr/bin/nodejs" ]; then
@@ -88,10 +110,12 @@ function node_install {
 		fi
 	fi
 }
+
 # package install
 function p_install {
 	check_packgn $1
 }
+
 # basic setup
 function basic_setup {
 	local npm="npm"
@@ -99,41 +123,24 @@ function basic_setup {
 
 	echo -e "\033[1;30m- running basic setup..."
 	pre_upgd
-	# installing node and npm tools
 	node_install
-	if [ -e "$dev_path$npm" ]; then
-		npm-package-list
-	else
-		sudo apt-get --purge remove nodejs*
-		node_install
-		npm-package-list
-		
-	fi
-	#install ruby gems and other
+	npm_av 
 	p_install ruby
 	p_install git
-	# installing editors
 	sublime-install	
-	#installing browsers
 	p_install google-chrome-stable
 	p_install firefox
-	#installing imagemagick and other
-	if [ -e "$dev_path$imp" ]; then
-		echo -e "\033[1;37m (imagemagick) :: already installed \033[0m"
-	else
-		echo -e "\033[1;32m (imagemagick) :: not installed.\033[0m"
-		sudo apt-get install imagemagick
-	fi
+	im_setup
 }
 
 echo -e "\033[1;30m(v$script_version)\033[0;35m hello, $USER! thx for using  $script_name ..."
 echo -e "\033[1;36mlets make some magic with your laptop ."
-echo -e "\033[1;36mwhat type of setup do you want? \033[1;33m[basic/advanced]: \033[0m"
+echo -e "\033[1;36mwhat do you want? \033[1;33m[setup/remove]: \033[0m"
 read -p "   -> " setup_type;
 
 case $setup_type in  
-  basic|Basic|BASIC ) basic_setup ;; 
-  advanced|Advanced|ADVANCED ) echo "Running advanced setup" ;; 
+  setup|Setup|SETUP ) basic_setup ;; 
+  remove|Remove|REMOVE ) echo "Removing ..." ;; 
   *) echo -e "\033[1;30m(error) \033[0;31muncorrect setup type.\033[0m" ;; 
 esac
 
