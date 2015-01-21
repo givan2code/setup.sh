@@ -50,6 +50,11 @@ function check_packgn {
 		echo -e "\033[0;31menter package name p_install() func \033[0m"
 	fi
 }
+# fix common error
+function fix_common {
+	echo "Fixing grunt wathc error..."
+	echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
+}
 
 #make pre updates
 function pre_upgd {
