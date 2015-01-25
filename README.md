@@ -77,17 +77,11 @@ Frameworks
 * [Express]()
 * [Meteor]()
 
-Editor
 
-* [Sublime Text 2]()
-
-Browsers
-
-* [Google Chrome]()
-* [Firefox]()
-* [Opera]()
 
 And its will fix some common troubles with compass, ruby, node, grunt/gulp
 
 For the end of installing, you will have ready for development linux machine.
 Its open-source and free for usage. Make fun =)
+
+License: MIT
