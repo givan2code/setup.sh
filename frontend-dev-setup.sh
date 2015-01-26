@@ -34,7 +34,7 @@ function npm_av {
 function download {
 	local dname=$1
 	echo -e "\033[1;33m installing $dname... \033[0m"
-	sudo apt-get install $dname
+	sudo apt-get install "$dname"
 }
 
 # check is package already exist
@@ -45,7 +45,7 @@ function check_packgn {
 			echo -e "\033[1;37m ($name) :: already installed \033[0m"
 		else
 			echo -e "\033[1;32m ($name) :: not installed.\033[0m"
-			download $name
+			download "$name"
 		fi
 	else
 		echo -e "\033[0;31menter package name p_install() func \033[0m"
@@ -97,7 +97,7 @@ function npm_install {
 		echo -e "\033[1;37m ($pckgname) :: already installed \033[0m"
 	else
 		echo -e "\033[1;32m ($pckgname) :: not installed.\033[0m"
-		sudo npm install -g $pckgname
+		sudo npm install -g "$pckgname"
 	fi
 }
 
@@ -120,7 +120,7 @@ function node_install {
 
 # package install
 function p_install {
-	check_packgn $1
+	check_packgn "$1"
 }
 
 # basic setup
