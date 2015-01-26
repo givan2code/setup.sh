@@ -36,6 +36,7 @@ function download {
 	echo -e "\033[1;33m installing $dname... \033[0m"
 	sudo apt-get install $dname
 }
+
 # check is package already exist
 function check_packgn {
 	name=$1
@@ -50,6 +51,7 @@ function check_packgn {
 		echo -e "\033[0;31menter package name p_install() func \033[0m"
 	fi
 }
+
 # fix common error
 function fix_common {
 	echo "Fixing grunt wathc error..."
@@ -133,9 +135,8 @@ function basic_setup {
 	p_install ruby
 	p_install git
 	sublime-install	
-	p_install google-chrome-stable
-	p_install firefox
 	im_setup
+	fix_common
 }
 
 echo -e "\033[1;30m(v$script_version)\033[0;35m hello, $USER! thx for using  $script_name ..."

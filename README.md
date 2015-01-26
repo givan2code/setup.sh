@@ -66,7 +66,6 @@ Package management:
 
 Testing tools:
 
-* [Karma]()
 * [Mocha]()
 * [Testem]()
 * [Jasmine](https://github.com/jasmine/jasmine-npm)
@@ -77,7 +76,9 @@ Frameworks
 * [Express]()
 * [Meteor]()
 
+Editor
 
+* [Sublime Text 2]()
 
 And its will fix some common troubles with compass, ruby, node, grunt/gulp
 
