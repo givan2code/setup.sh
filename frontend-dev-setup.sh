@@ -101,6 +101,26 @@ function npm_install {
 	fi
 }
 
+# changing to zsh
+function jump_to_zsh {
+	case "$SHELL" in
+  	*/zsh) echo "You have zsh" ;;
+  	*)	echo -e "Changing your shell to zsh ..."
+      	chsh -s "$(which zsh)"
+    	;;
+	esac
+}
+
+# install zsh
+function zsh_use {
+	if [ -e "$(which dropbox)" ]; then
+		echo "zsh is installed"
+		jump_to_zsh
+	else
+		echo "zsh not installed"
+	fi
+}
+
 #installing node (tested in mint 13 x64)
 function node_install {
 	if [ -e "/usr/bin/nodejs" ]; then
@@ -129,14 +149,15 @@ function basic_setup {
 	local imp="convert"
 
 	echo -e "\033[1;30m- running basic setup..."
-	pre_upgd
-	node_install
-	npm_av 
-	p_install ruby
-	p_install git
-	sublime-install	
-	im_setup
-	fix_common
+	# pre_upgd
+	# node_install
+	# npm_av 
+	# p_install ruby
+	# p_install git
+	# sublime-install	
+	# im_setup
+	# fix_common
+	zsh_use
 }
 
 echo -e "\033[1;30m(v$script_version)\033[0;35m hello, $USER! thx for using  $script_name ..."
