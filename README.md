@@ -1,5 +1,7 @@
 Under development right now.
 
+
+[![Build Status](https://travis-ci.org/drKraken/frontend-dev-setup.svg?branch=master)](https://travis-ci.org/drKraken/frontend-dev-setup)
 # Frontend-dev-setup (Unix/Linux)
 
 Inpired by Laptop script from <https://github.com/thoughtbot> 
