@@ -156,14 +156,14 @@ function basic_setup {
 	local imp="convert"
 
 	echo -e "\033[1;30m- running basic setup..."
-	# pre_upgd
-	# node_install
-	# npm_av 
-	# p_install ruby
-	# p_install git
-	# sublime-install	
-	# im_setup
-	# fix_common
+	pre_upgd
+	node_install
+	npm_av 
+	p_install ruby
+	p_install git
+	sublime-install	
+	im_setup
+	fix_common
 	zsh_use
 }
 
