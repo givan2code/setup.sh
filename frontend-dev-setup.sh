@@ -104,7 +104,7 @@ function npm_install {
 # changing to zsh
 function jump_to_zsh {
 	case "$SHELL" in
-  	*/zsh) echo "You have zsh" ;;
+  	*/zsh) echo "You have zsh as default" ;;
   	*)	echo -e "Changing your shell to zsh ..."
       	chsh -s "$(which zsh)"
     	;;
@@ -113,12 +113,19 @@ function jump_to_zsh {
 
 # install zsh
 function zsh_use {
-	if [ -e "$(which dropbox)" ]; then
-		echo "zsh is installed"
-		jump_to_zsh
-	else
-		echo "zsh not installed"
-	fi
+	case "$(which zsh)" in
+		*/zsh) echo "Zsh installed"; jump_to_zsh ;;
+		*)  echo "Installing zsh" 
+			sudo apt-get install zsh;
+			jump_to_zsh
+			echo "installing oh-my-zsh"
+			if [ -e "$(which wget)" ]; then
+				wget --no-check-certificate http://install.ohmyz.sh -O - | sh
+			else
+				curl -L http://install.ohmyz.sh | sh
+			fi
+			;;
+	esac
 }
 
 #installing node (tested in mint 13 x64)
