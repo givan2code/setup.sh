@@ -1,3 +1,5 @@
+Under development right now.
+
 # Frontend-dev-setup (Unix/Linux)
 
 Inpired by Laptop script from <https://github.com/thoughtbot> 
