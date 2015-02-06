@@ -5,9 +5,15 @@
 # for fun
 
 # declare variables here 
-script_name=$1
-script_version="0.1"
+SCRIPT_NAME=$1
+SCRIPT_VERSION="0.1"
 dev_path="/usr/bin/"
+
+if [ -e "$(which apt-get)" ]; then
+	PMAN="apt-get"
+elif [ -e "$(which yum)" ]; then
+	PMAN="yum"
+fi
 
 #npm package list . simply add one more you like
 function npm-package-list {
@@ -24,7 +30,7 @@ function npm_av {
 	if [ -e "$dev_path$npm" ]; then
 		npm-package-list
 	else
-		sudo apt-get --purge remove nodejs*
+		sudo $PMAN --purge remove nodejs*
 		node_install
 		npm-package-list
 	fi
@@ -34,7 +40,7 @@ function npm_av {
 function download {
 	local dname=$1
 	echo -e "\033[1;33m installing $dname... \033[0m"
-	sudo apt-get install "$dname"
+	sudo $PMAN install "$dname"
 }
 
 # check is package already exist
@@ -61,8 +67,8 @@ function fix_common {
 #make pre updates
 function pre_upgd {
 	echo -e "- normalize package list..."
-	sudo apt-get autoremove;
-	sudo apt-get autoclean; 
+	sudo $PMAN autoremove;
+	sudo $PMAN autoclean; 
 	echo -e "\033[1;32m- ready to installing..."
 }
 
@@ -73,10 +79,15 @@ function sublime-install {
 		echo -e "\033[1;37m (sublime2) :: already installed \033[0m"
 	else
 		echo -e "\033[1;32m (sublime2) :: not installed. \033[0m"
-		sudo add-apt-repository ppa:webupd8team/sublime-text-2;
-		sudo apt-get update
-		sudo apt-get --purge remove sublime-text*
-		sudo apt-get install sublime-text
+
+		if [ "$PMAN" = "yum" ]; then
+			sudo yum-config-manager --add-repo ppa:webupd8team/sublime-text-2;
+		else
+			sudo add-apt-repository ppa:webupd8team/sublime-text-2;
+		fi
+		sudo $PMAN update
+		sudo $PMAN --purge remove sublime-text*
+		sudo $PMAN install sublime-text
 	fi
 }
 
@@ -86,7 +97,7 @@ function im_setup {
 		echo -e "\033[1;37m (imagemagick) :: already installed \033[0m"
 	else
 		echo -e "\033[1;32m (imagemagick) :: not installed.\033[0m"
-		sudo apt-get install imagemagick
+		sudo $PMAN install imagemagick
 	fi
 }
 
@@ -116,7 +127,7 @@ function zsh_use {
 	case "$(which zsh)" in
 		*/zsh) echo "Zsh installed"; jump_to_zsh ;;
 		*)  echo "Installing zsh" 
-			sudo apt-get install zsh;
+			sudo $PMAN install zsh;
 			jump_to_zsh
 			echo "installing oh-my-zsh"
 			if [ -e "$(which wget)" ]; then
@@ -136,11 +147,11 @@ function node_install {
 		echo -e "\033[1;32m (nodejs) :: not installed.\033[0m"
 		if [ -e "/usr/bin/curl" ]; then
 			curl -sL https://deb.nodesource.com/setup | sudo bash -
-			sudo apt-get install -y nodejs
+			sudo $PMAN install -y nodejs
 		else
-			sudo apt-get install curl;
+			sudo $PMAN install curl;
 			curl -sL https://deb.nodesource.com/setup | sudo bash -
-			sudo apt-get install -y nodejs
+			sudo $PMAN install -y nodejs
 		fi
 	fi
 }
@@ -150,6 +161,7 @@ function p_install {
 	check_packgn "$1"
 }
 
+
 # basic setup
 function basic_setup {
 	local npm="npm"
@@ -157,17 +169,17 @@ function basic_setup {
 
 	echo -e "\033[1;30m- running basic setup..."
 	pre_upgd
-	node_install
-	npm_av 
-	p_install ruby
-	p_install git
-	sublime-install	
-	im_setup
-	fix_common
-	zsh_use
+	# node_install
+	# npm_av 
+	# p_install ruby
+	# p_install git
+	# sublime-install	
+	# im_setup
+	# fix_common
+	# zsh_use
 }
 
-echo -e "\033[1;30m(v$script_version)\033[0;35m hello, $USER! thx for using  $script_name ..."
+echo -e "\033[1;30m(v$SCRIPT_VERSION)\033[0;35m hello, $USER! thx for using  $SCRIPT_NAME ..."
 echo -e "\033[1;36mlets make some magic with your laptop ."
 echo -e "\033[1;36mwhat do you want? \033[1;33m[setup/remove]: \033[0m"
 read -p "   -> " setup_type;
@@ -177,4 +189,3 @@ case $setup_type in
   remove|Remove|REMOVE ) echo "Removing ..." ;; 
   *) echo -e "\033[1;30m(error) \033[0;31muncorrect setup type.\033[0m" ;; 
 esac
-
