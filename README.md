@@ -2,11 +2,11 @@ Under development right now.
 
 
 [![Build Status](https://travis-ci.org/drKraken/frontend-dev-setup.svg?branch=master)](https://travis-ci.org/drKraken/setup.sh)
-# Frontend-dev-setup (Unix/Linux)
+# Setup your Linux machine
 
 Inpired by Laptop script from <https://github.com/thoughtbot> 
 
-Frontend-dev-setup is a simple way to make your unix/linux machine ready for frontend development.
+'Setup' is a simple way to make your unix/linux machine ready for frontend development.
 With this script you can in one click install all tools, that you need for comfortable frontdev on Linux machine.
 
 # Support
@@ -23,12 +23,12 @@ It can be used on :
 
 It's can be installed via curl : 
 
-    bash <(curl -s https://raw.githubusercontent.com/drKraken/frontend-dev-setup/master/frontend-dev-setup.sh)
+    bash <(curl -s https://raw.githubusercontent.com/drKraken/setup.sh/master/setup.sh)
 
 If you dont have curl installed : 
 
     sudo apt-get install curl;
-    bash <(curl -s https://raw.githubusercontent.com/drKraken/frontend-dev-setup/master/frontend-dev-setup.sh)
+    bash <(curl -s https://raw.githubusercontent.com/drKraken/setup.sh/master/setup.sh)
 
 # Usage 
 
