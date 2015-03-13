@@ -51,9 +51,6 @@ General:
 * [Susy]()
 * [Breakpoint]()
 * [Jekyll]()
-* [MongoDB]()
-* [Siege]()
-* [S3cmd]()
 * [Git]()
 * [ImageMagick]()
 
@@ -76,7 +73,6 @@ Frameworks
 
 * [Sails]()
 * [Express]()
-* [Meteor]()
 
 Editor
 
