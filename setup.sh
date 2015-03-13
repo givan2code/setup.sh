@@ -16,7 +16,7 @@ elif [ -e "$(which yum)" ]; then
 fi
 
 #npm package list . simply add one more you like
-function npm-package-list {
+fnpm-package-list() {
 	npm_install gulp
 	npm_install grunt
 	npm_install bower
@@ -26,7 +26,7 @@ function npm-package-list {
 }
 
 # check for npm in path
-function npm_av {
+npm_av() {
 	if [ -e "$dev_path$npm" ]; then
 		npm-package-list
 	else
@@ -37,14 +37,14 @@ function npm_av {
 }
 
 #download package
-function download {
+download() {
 	local dname=$1
 	echo -e "\033[1;33m installing $dname... \033[0m"
 	sudo $PMAN install "$dname"
 }
 
 # check is package already exist
-function check_packgn {
+check_packgn() {
 	name=$1
 	if [ "$name" != "" ]; then
 		if [ -e "$dev_path$name" ]; then
@@ -59,13 +59,13 @@ function check_packgn {
 }
 
 # fix common error
-function fix_common {
+fix_common() {
 	echo "Fixing grunt wathc error..."
 	echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
 }
 
 #make pre updates
-function pre_upgd {
+pre_upgd() {
 	echo -e "- normalize package list..."
 	sudo $PMAN autoremove;
 	sudo $PMAN autoclean; 
@@ -73,7 +73,7 @@ function pre_upgd {
 }
 
 #installing sublime-text
-function sublime-install {
+sublime-install() {
 	local sublime="sublime-text"
 	if [ -e "$dev_path$sublime" ]; then
 		echo -e "\033[1;37m (sublime2) :: already installed \033[0m"
@@ -92,7 +92,7 @@ function sublime-install {
 }
 
 #installing image magick 
-function im_setup {
+im_setup() {
 	if [ -e "$dev_path$imp" ]; then
 		echo -e "\033[1;37m (imagemagick) :: already installed \033[0m"
 	else
@@ -102,8 +102,9 @@ function im_setup {
 }
 
 #installing npm packages
-function npm_install {
+npm_install() {
 	local pckgname=$1
+
 	if [ -e "$dev_path$pckgname" ]; then
 		echo -e "\033[1;37m ($pckgname) :: already installed \033[0m"
 	else
@@ -113,7 +114,7 @@ function npm_install {
 }
 
 # changing to zsh
-function jump_to_zsh {
+jump_to_zsh() {
 	case "$SHELL" in
   	*/zsh) echo "You have zsh as default" ;;
   	*)	echo -e "Changing your shell to zsh ..."
@@ -123,7 +124,7 @@ function jump_to_zsh {
 }
 
 # install zsh
-function zsh_use {
+zsh_use() {
 	case "$(which zsh)" in
 		*/zsh) echo "Zsh installed"; jump_to_zsh ;;
 		*)  echo "Installing zsh" 
@@ -140,7 +141,7 @@ function zsh_use {
 }
 
 #installing node (tested in mint 13 x64)
-function node_install {
+node_install() {
 	if [ -e "/usr/bin/nodejs" ]; then
 		echo -e "\033[1;37m (nodejs) :: already installed \033[0m"
 	else
@@ -157,26 +158,26 @@ function node_install {
 }
 
 # package install
-function p_install {
+p_install() {
 	check_packgn "$1"
 }
 
 
 # basic setup
-function basic_setup {
+basic_setup() {
 	local npm="npm"
 	local imp="convert"
 
 	echo -e "\033[1;30m- running basic setup..."
 	pre_upgd
-	# node_install
-	# npm_av 
-	# p_install ruby
-	# p_install git
-	# sublime-install	
-	# im_setup
-	# fix_common
-	# zsh_use
+	node_install
+	npm_av 
+	p_install ruby
+	p_install git
+	sublime-install	
+	im_setup
+	fix_common
+	zsh_use
 }
 
 echo -e "\033[1;30m(v$SCRIPT_VERSION)\033[0;35m hello, $USER! thx for using  $SCRIPT_NAME ..."
