@@ -4,8 +4,8 @@ Under development right now.
 
 Inpired by Laptop script from <https://github.com/thoughtbot> 
 
-'Setup' is a simple way to make your unix/linux machine ready for web development.
-With this script you can in one click install all tools, that you need for comfortable development on Linux machine.
+'Setup' is a simple way to make your unix/linux machine ready for frontend web development.
+With this script you can in one click install all tools, that you need for comfortable development on Linux machine. Its like Laptop script but for Linux and frontend ;-)
 
 # Support
 
