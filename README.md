@@ -56,6 +56,7 @@ General:
 * [S3cmd]()
 * [Git]()
 * [ImageMagick]()
+* [Surge](http://surge.sh)
 
 Task runners:
 

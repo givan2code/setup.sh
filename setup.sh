@@ -16,13 +16,15 @@ elif [ -e "$(which yum)" ]; then
 fi
 
 #npm package list . simply add one more you like
-fnpm-package-list() {
+npm-package-list() {
 	npm_install gulp
 	npm_install grunt
 	npm_install bower
 	npm_install mocha
 	npm_install testem
 	npm_install sails
+	npm_install express
+	npm_install surge
 }
 
 # check for npm in path
@@ -62,14 +64,6 @@ check_packgn() {
 fix_common() {
 	echo "Fixing grunt wathc error..."
 	echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
-}
-
-#make pre updates
-pre_upgd() {
-	echo -e "- normalize package list..."
-	sudo $PMAN autoremove;
-	sudo $PMAN autoclean; 
-	echo -e "\033[1;32m- ready to installing..."
 }
 
 #installing sublime-text
@@ -142,7 +136,7 @@ zsh_use() {
 
 #installing node (tested in mint 13 x64)
 node_install() {
-	if [ -e "/usr/bin/nodejs" ]; then
+	if [ -e "$(which nodejs)" ]; then
 		echo -e "\033[1;37m (nodejs) :: already installed \033[0m"
 	else
 		echo -e "\033[1;32m (nodejs) :: not installed.\033[0m"
@@ -162,19 +156,20 @@ p_install() {
 	check_packgn "$1"
 }
 
-
 # basic setup
 basic_setup() {
 	local npm="npm"
 	local imp="convert"
 
 	echo -e "\033[1;30m- running basic setup..."
-	pre_upgd
 	node_install
 	npm_av 
 	p_install ruby
 	p_install git
-	sublime-install	
+	sublime-install
+	sudo gem install sass
+	sudo gem install jekyll
+	sudo gem install compass --pre
 	im_setup
 	fix_common
 	zsh_use
